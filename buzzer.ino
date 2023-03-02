@@ -7,7 +7,6 @@ byte tempo = 200;
 // change this to whichever pin you want to use
 byte buzzer = 10;
 
-
 const byte ROWS = 4; 
 const byte COLS = 4; 
 
@@ -23,6 +22,12 @@ byte colPins[COLS] = {5, 4, 3, 2};
 
 Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
+void setup(){
+  Serial.begin(9600);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+}
 
 void song(int melody[], int melody_size) {
   // iterate over the notes of the melody.
@@ -38,6 +43,9 @@ void song(int melody[], int melody_size) {
   int divider = 0, noteDuration = 0;
   
   for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
+    digitalWrite(11, LOW);
+    digitalWrite(12, LOW);
+    digitalWrite(13, LOW);
 
     // calculates the duration of each note
     divider = melody[thisNote + 1];
@@ -50,6 +58,10 @@ void song(int melody[], int melody_size) {
       noteDuration *= 1.5; // increases the duration in half for dotted notes
     }
 
+    if (melody[thisNote] > 270) {digitalWrite(11, HIGH);}
+    if (melody[thisNote] > 330) {digitalWrite(12, HIGH);}
+    if (melody[thisNote] > 380) {digitalWrite(13, HIGH);}
+
     // we only play the note for 90% of the duration, leaving 10% as a pause
     tone(buzzer, melody[thisNote], noteDuration * 0.9);
 
@@ -61,14 +73,12 @@ void song(int melody[], int melody_size) {
   }
 }
 
-void setup(){
-}
-
 void loop() {
   // Play one song on loop 
-  //song(melody_odetojoy, sizeof(melody_odetojoy));
-  //delay(3000);
+  song(melody_odetojoy, sizeof(melody_odetojoy));
+  delay(3000);
 
+  /*
   char customKey = customKeypad.getKey(); // recevies signal from the key board 
 
   // Play piano on key board 
@@ -89,5 +99,6 @@ void loop() {
   else if (customKey=='e'){tone(buzzer, NOTE_B7, 200);}
   else if (customKey=='f'){tone(buzzer, NOTE_C8, 200);}
   else if (customKey=='g'){tone(buzzer, NOTE_D8, 200);}
-
+  */
 }
+
