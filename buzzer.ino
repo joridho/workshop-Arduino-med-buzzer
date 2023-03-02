@@ -7,7 +7,7 @@ byte tempo = 200;
 // change this to whichever pin you want to use
 byte buzzer = 10;
 
-/*
+
 const byte ROWS = 4; 
 const byte COLS = 4; 
 
@@ -22,7 +22,7 @@ byte rowPins[ROWS] = {9, 8, 7, 6};
 byte colPins[COLS] = {5, 4, 3, 2}; 
 
 Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
-*/
+
 
 void song(int melody[], int melody_size) {
   // iterate over the notes of the melody.
@@ -65,5 +65,29 @@ void setup(){
 }
 
 void loop() {
+  // Play one song on loop 
+  //song(melody_odetojoy, sizeof(melody_odetojoy));
+  //delay(3000);
+
+  char customKey = customKeypad.getKey(); // recevies signal from the key board 
+
+  // Play piano on key board 
+  if (customKey=='1'){tone(buzzer, NOTE_C6, 200);}
+  else if (customKey=='1'){tone(buzzer, NOTE_C6, 200);}
+  else if (customKey=='2'){tone(buzzer, NOTE_D6, 200);}
+  else if (customKey=='3'){tone(buzzer, NOTE_E6, 200);}
+  else if (customKey=='4'){tone(buzzer, NOTE_F6, 200);}
+  else if (customKey=='5'){tone(buzzer, NOTE_G6, 200);}
+  else if (customKey=='6'){tone(buzzer, NOTE_A6, 200);}
+  else if (customKey=='7'){tone(buzzer, NOTE_B6, 200);}
+  else if (customKey=='8'){tone(buzzer, NOTE_C7, 200);}
+  else if (customKey=='9'){tone(buzzer, NOTE_D7, 200);}
+  else if (customKey=='a'){tone(buzzer, NOTE_E7, 200);}
+  else if (customKey=='b'){tone(buzzer, NOTE_F7, 200);}
+  else if (customKey=='c'){tone(buzzer, NOTE_G7, 200);}
+  else if (customKey=='d'){tone(buzzer, NOTE_A7, 200);}
+  else if (customKey=='e'){tone(buzzer, NOTE_B7, 200);}
+  else if (customKey=='f'){tone(buzzer, NOTE_C8, 200);}
+  else if (customKey=='g'){tone(buzzer, NOTE_D8, 200);}
 
 }
